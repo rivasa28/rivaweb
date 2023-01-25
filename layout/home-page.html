@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Agelia Academy</title>
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/query.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle"
+            data-toggle="collapse"
+            data-target="#myNavbar"
+          >
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"
+            >AGELIA<span> ACADEMY</span></a
+          >
+        </div>
+        <!-- <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../index.html"><i class="fa fa-user" aria-hidden="true" style="font-size: 25px"></i></a></li>
+          </ul> -->
+          <div class="dropdown navbar-right">
+            <i class="fa fa-user" aria-hidden="true" style="font-size: 25px; margin-top: 20px; cursor: pointer;"></i>
+            <div class="dropdown-content">
+              <a href="#edit-profil">Profil</a>
+              <a href="../layout/login.html">Keluar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+
+    <section id="work-shop" class="section-padding">
+      <div class="container">
+        <div class="row">
+          <div class="header-section text-center">
+            <h2>Kelola Data Kursus</h2>
+            <hr class="bottom-line" />
+          </div>
+          <div class="btn-simpan">
+          <a
+          href="#add-kursus"
+          style="
+            background-color: #5fcf80; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+            border-radius: 15px;
+            font-size: 15px;
+            margin-bottom: 10px;"
+          >Tambah Kursus Baru</a>
+          </div>
+          <!-- Tambah -->
+          <div id="add-kursus" class="overlay">
+            <div class="popup">
+              <h4>Tambah Kursus Baru</h4>
+              <a class="close" href="#">&times;</a>
+              <form action="#" name="formTambah" id="formTambah" method="post">
+                <div class="form-group">
+                    <label for="">Nama Kursus</label>
+                    <input type="text" name="nama" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Harga</label>
+                    <input type="text" name="harga" onkeypress="return hanyaAngka(event)" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Waktu Kursus</label>
+                    <select id="lamakursus">
+                      <option value="1 Bulan">1 Bulan</option>
+                      <option value="2 Bulan">2 Bulan</option>
+                      <option value="3 Bulan">3 Bulan</option>
+                      <option value="4 Bulan">4 Bulan</option>
+                      <option value="5 Bulan">5 Bulan</option>
+                      <option value="6 Bulan">6 Bulan</option>
+                    </select>
+                </div>
+    
+                <div class="form-group">
+                  <input type="button" value="Simpan" onclick="tambahKursus()" class="submit">
+                </div>
+            </form>
+            </div>
+          </div>
+            <div class="service-box text-center">
+              <div class="table">
+                <table class="table table-hover">
+                  <thead><th style="width: 7%;">No</th><th style="width: 28%;">Nama Kursus</th><th style="width: 25%;">Harga</th><th style="width: 28%;">Jangka Waktu</th><th style="width: 12%;">Action</th></thead>
+                  <tbody id="tbody">
+                    </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Edit -->
+            <div id="edit-kursus" class="overlay">
+              <div class="popup">
+                <h4>Edit Kursus</h4>
+                <a class="close" href="#">&times;</a>
+                <form action="#" name="formEdit" id="formEdit" method="post">
+                  <div class="form-group">
+                      <label for="">Nama Kursus</label>
+                      <input type="text" name="nama" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="">Harga</label>
+                      <input type="text" name="harga" onkeypress="return hanyaAngka(event)" required>
+                      <input type="hidden" name="id">
+                  </div>
+                  <div class="form-group">
+                      <label for="">Waktu Kursus</label>
+                      <select id="lamakursusEdit" name="lamakursus">
+                        <option value="1 Bulan">1 Bulan</option>
+                        <option value="2 Bulan">2 Bulan</option>
+                        <option value="3 Bulan">3 Bulan</option>
+                        <option value="4 Bulan">4 Bulan</option>
+                        <option value="5 Bulan">5 Bulan</option>
+                        <option value="6 Bulan">6 Bulan</option>
+                      </select>
+                  </div>
+      
+                  <div class="form-group">
+                    <input type="button" value="Edit" onclick="editProcess()" class="submit" style="cursor: pointer;">
+                  </div>
+              </form>
+              </div>
+            </div>
+
+                 <!-- Profil -->
+                 <div id="edit-profil" class="overlay">
+                  <div class="popup">
+                    <h4>Profil</h4>
+                    <a class="close" href="#">&times;</a>
+                    <form action="#" name="formProfil" id="formProfil" method="post">
+                      <div class="form-group">
+                          <label for="">Nama</label>
+                          <input type="text" name="nama" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="">Email</label>
+                          <input type="text" name="email" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" name="password" required>
+                    </div>
+          
+                      <div class="form-group">
+                        <input type="button" value="Ubah Profil" onclick="editProfile()" class="submit" style="cursor: pointer;">
+                      </div>
+                  </form>
+                  </div>
+                </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="feature" class="section-padding">
+      <div class="container">
+        <div class="row">
+          <h3 class="text-center">Kenapa pilih kursus disini?</h3>
+          <div class="feature-info">
+            <div class="fea">
+                <div class="col-md-4">
+                  <div class="heading pull-right">
+                    <h4>Pengajar Kompeten</h4>
+                    <p>
+                      Pengajar sudah mempunyai pengalaman di bidangnya serta
+                      sertifikat sebagai legalitas resmi. Sudah pasti kemampuan
+                      pengajar kompeten dan siap untuk mengajar kamu!
+                    </p>
+                  </div>
+                  <div class="fea-img pull-left">
+                    <i class="fa fa-free-code-camp"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="fea">
+                <div class="col-md-4">
+                  <div class="heading pull-right">
+                    <h4>Materi Uptodate</h4>
+                    <p>
+                      Pembelajaran berdasarkan dengan perkembangan materi yang
+                      terkini. Sehingga mulai tools dan komponen pemrograman yang
+                      digunakan dipastikan versi terbaru.
+                    </p>
+                  </div>
+                  <div class="fea-img pull-left">
+                    <i class="fa fa-superpowers"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="fea">
+                <div class="col-md-4">
+                  <div class="heading pull-right">
+                    <h4>Sharing Session</h4>
+                    <p>
+                      Terdapat sesi diskusi dengan pengajar, dan kamu bisa sharing
+                      tentang problem yang dihadapi. Sehingga proses pemahaman
+                      menjadi lebih terukur.
+                    </p>
+                  </div>
+                  <div class="fea-img pull-left">
+                    <i class="fa fa-ravelry"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="fea">
+                <div class="col-md-4">
+                  <div class="heading pull-right"></div>
+                  <div class="fea-img pull-left">
+                    <br />
+                  </div>
+                </div>
+              </div>
+              <div class="fea">
+                <div class="col-md-4">
+                  <div class="heading pull-right">
+                    <h4>Harga Terjangkau</h4>
+                    <p>
+                      Dapatkan kursus terbaik dengan harga yang sangat terjangkau dibandingkan yang lain hanya di Agelia Academy.
+                    </p>
+                  </div>
+                  <div class="fea-img pull-left">
+                    <i class="fa fa-superpowers"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="fea">
+                <div class="col-md-4">
+                  <div class="heading pull-right">
+                    <h4>Koneksi Luas</h4>
+                    <p>
+                      Terhubung dengan banyak orang dengan background yang berbeda, tentunya akan membantu kamu lebih mudah dikenal banyak orang. Dan meraih banyak kesempatan.
+                    </p>
+                  </div>
+                  <div class="fea-img pull-left">
+                    <i class="fa fa-gg-circle"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="fea">
+                <div class="col-md-4">
+                  <div class="heading pull-right">
+                    <h4>Raih Pekerjaan Impian</h4>
+                    <p>
+                     Dengan kemampuan yang profesional berkat bantuan kursus disini, kamu akan lebih mudah dalam menggapai pekerjaan impian karna kamu memenuhi kualifikasi perusahaan.
+                    </p>
+                  </div>
+                  <div class="fea-img pull-left">
+                    <i class="fa fa-briefcase"></i>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+ 
+
+    <footer id="footer" class="footer">
+      <div class="text-center">
+        @Copyright by 20552011238_Riva Sri Agelia_TIFK20
+      </div>
+    </footer>
+  </body>
+</html>
